@@ -1,0 +1,18 @@
+task1_path = 'dataset/raw_data/task1'
+task1_train_path = task1_path + '/training-set'
+task1_train_complete_skull = task1_train_path + '/complete_skull'
+task1_train_defect_skull = task1_train_path + '/defective_skull'
+task1_train_implant = task1_train_path + '/implant'
+task1_test_path = task1_path + '/test-set'
+
+task3_path = 'dataset/raw_data/task3'
+task3_train_path = task3_path + '/training-set'
+task3_train_complete_skull = task3_train_path + '/complete_skull'
+task3_train_defect_skull = task3_train_path + '/defective_skull'
+task3_train_implant = task3_train_path + '/implant'
+task3_test_path = task3_path + '/test-set'
+
+task1_train_csv = 'data/task1/train.csv'
+task1_val_csv = 'data/task1/val.csv'
+task3_train_csv = 'data/task3/train.csv'
+task3_val_csv = 'data/task3/val.csv'
