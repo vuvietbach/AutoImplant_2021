@@ -1,0 +1,95 @@
+/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.16.5 and <1.23.0 is required for this version of SciPy (detected version 1.23.3
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/pytorch_lightning/trainer/connectors/accelerator_connector.py:447: LightningDeprecationWarning: Setting `Trainer(gpus=[0])` is deprecated in v1.7 and will be removed in v2.0. Please use `Trainer(accelerator='gpu', devices=[0])` instead.
+  rank_zero_deprecation(
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+Missing logger folder: log/Task1_Experiments/Task1_Exp1/cp_1/lightning_logs
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+
+  | Name | Type | Params
+------------------------------
+0 | unet | UNet | 12.7 M
+------------------------------
+12.7 M    Trainable params
+0         Non-trainable params
+12.7 M    Total params
+50.894    Total estimated model params size (MB)
+Sanity Checking: 0it [00:00, ?it/s]
+Validation dataloader created, size:  60
+
+Traceback (most recent call last):
+  File "/mnt/disk1/hungvv/vuvietbach/AutoImplant_2021/my_code/exp.py", line 78, in <module>
+    experiment(1)
+  File "/mnt/disk1/hungvv/vuvietbach/AutoImplant_2021/my_code/exp.py", line 59, in experiment
+    tr.training(training_params)
+  File "/mnt/disk1/hungvv/vuvietbach/AutoImplant_2021/./ori_code/training_implant_reconstruction.py", line 123, in training
+    trainer.fit(model, data_module)
+  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/pytorch_lightning/trainer/trainer.py", line 696, in fit
+    self._call_and_handle_interrupt(
+  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/pytorch_lightning/trainer/trainer.py", line 650, in _call_and_handle_interrupt
+    return trainer_fn(*args, **kwargs)
+  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/pytorch_lightning/trainer/trainer.py", line 735, in _fit_impl
+    results = self._run(model, ckpt_path=self.ckpt_path)
+  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/pytorch_lightning/trainer/trainer.py", line 1166, in _run
+    results = self._run_stage()
+  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/pytorch_lightning/trainer/trainer.py", line 1252, in _run_stage
+    return self._run_train()
+  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/pytorch_lightning/trainer/trainer.py", line 1274, in _run_train
+    self._run_sanity_check()
+  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/pytorch_lightning/trainer/trainer.py", line 1343, in _run_sanity_check
+    val_loop.run()
+  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/pytorch_lightning/loops/loop.py", line 200, in run
+    self.advance(*args, **kwargs)
+  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/pytorch_lightning/loops/dataloader/evaluation_loop.py", line 155, in advance
+    dl_outputs = self.epoch_loop.run(self._data_fetcher, dl_max_batches, kwargs)
+  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/pytorch_lightning/loops/loop.py", line 200, in run
+    self.advance(*args, **kwargs)
+  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/pytorch_lightning/loops/epoch/evaluation_epoch_loop.py", line 127, in advance
+    batch = next(data_fetcher)
+  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/pytorch_lightning/utilities/fetching.py", line 184, in __next__
+    return self.fetching_function()
+  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/pytorch_lightning/utilities/fetching.py", line 263, in fetching_function
+    self._fetch_next_batch(self.dataloader_iter)
+  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/pytorch_lightning/utilities/fetching.py", line 277, in _fetch_next_batch
+    batch = next(iterator)
+  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 681, in __next__
+    data = self._next_data()
+  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1376, in _next_data
+    return self._process_data(data)
+  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1402, in _process_data
+    data.reraise()
+  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/torch/_utils.py", line 461, in reraise
+    raise exception
+KeyError: Caught KeyError in DataLoader worker process 0.
+Original Traceback (most recent call last):
+  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/pandas/core/indexes/base.py", line 3629, in get_loc
+    return self._engine.get_loc(casted_key)
+  File "pandas/_libs/index.pyx", line 136, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 163, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 5198, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 5206, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'Defective Skull Path'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/torch/utils/data/_utils/worker.py", line 302, in _worker_loop
+    data = fetcher.fetch(index)
+  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py", line 49, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py", line 49, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/mnt/disk1/hungvv/vuvietbach/AutoImplant_2021/./ori_code/datasets.py", line 58, in __getitem__
+    defect_path = current_case['Defective Skull Path']
+  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/pandas/core/series.py", line 958, in __getitem__
+    return self._get_value(key)
+  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/pandas/core/series.py", line 1069, in _get_value
+    loc = self.index.get_loc(label)
+  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/pandas/core/indexes/base.py", line 3631, in get_loc
+    raise KeyError(key) from err
+KeyError: 'Defective Skull Path'
+
+                                   

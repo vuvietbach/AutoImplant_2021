@@ -3,7 +3,8 @@ import numpy as np
 import pandas as pd
 import torch as tc
 import torch.utils as tcu
-
+import sys
+sys.path.append(os.path.dirname(__file__))
 import utils as u
 
 import augmentation as aug
@@ -54,7 +55,7 @@ class AutoImplantDataset(tcu.data.Dataset):
 
     def __getitem__(self, idx):
         current_case = self.df.loc[idx]
-        defect_path = current_case['Defective Skull Path']
+        defect_path = current_case['defect_skull']
         if self.mode == "defect":
             defect, spacing, _ = u.load_volume(self.data_folder / defect_path)
             if self.transforms is not None:
@@ -62,7 +63,7 @@ class AutoImplantDataset(tcu.data.Dataset):
             spacing = tc.Tensor(spacing)
             return tc.from_numpy(defect).to(self.dtype), spacing
         if self.mode == "defect_complete":
-            complete_path = current_case['Complete Skull Path']
+            complete_path = current_case['complete_skull']
             defect, spacing, _ = u.load_volume(self.data_folder / defect_path)
             complete, _, _ = u.load_volume(self.data_folder / complete_path)
             if self.transforms is not None:
@@ -70,7 +71,7 @@ class AutoImplantDataset(tcu.data.Dataset):
             spacing = tc.Tensor(spacing)
             return tc.from_numpy(defect).to(self.dtype), tc.from_numpy(complete).to(self.dtype), spacing
         if self.mode == "defect_implant":
-            implant_path = current_case['Implant Path']
+            implant_path = current_case['implant']
             defect, spacing, _ = u.load_volume(self.data_folder / defect_path)
             implant, _, _ = u.load_volume(self.data_folder / implant_path)
             if self.transforms is not None:

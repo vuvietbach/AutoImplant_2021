@@ -1,11 +1,12 @@
 import sys
-sys.path.append('code')
-import utils as u
+sys.path.append('./')
+import ori_code.utils as u
 import paths as p
 import pandas as pd
 import numpy as np
 import os
 import pathlib
+import csv
 def preprocess_training_set(csv_path, **preprocessing_params):
     output_spacing = preprocessing_params['output_spacing']
     output_size = preprocessing_params['output_size']
@@ -14,6 +15,14 @@ def preprocess_training_set(csv_path, **preprocessing_params):
 
     dataframe = pd.read_csv(csv_path)
     print("Dataset size: ", len(dataframe))
+    
+    out_csv_path = csv_path.replace('raw_data', 'preprocessed_data')
+    out_dir = '/'.join(out_csv_path.split('/')[:-1])
+    os.makedirs(out_dir, exist_ok=True)
+    
+    f = open(out_csv_path, 'w')
+    writer = csv.writer(f)
+    writer.writerow(['complete_skull' , 'defect_skull', 'implant'])
     
     errors = list()
     for (id, complete_skull_path, defective_skull_path, implant_path) in dataframe.itertuples():
@@ -47,9 +56,12 @@ def preprocess_training_set(csv_path, **preprocessing_params):
         u.save_volume(preprocessed_complete_skull, output_spacing, pathlib.Path(preprocessed_complete_skull_path))
         u.save_volume(preprocessed_defective_skull, output_spacing, pathlib.Path(preprocessed_defective_skull_path))
         u.save_volume(preprocessed_implant, output_spacing, pathlib.Path(preprocessed_implant_path))
+
+        writer.writerow([preprocessed_complete_skull_path, preprocessed_defective_skull_path, preprocessed_implant_path])
     
     print("Mean error: ", np.mean(errors))
     print("Max error: ", np.max(errors))
+    f.close()
 
 def preprocess_testing_set(csv_path, **preprocessing_params):
     output_spacing = preprocessing_params['output_spacing']
@@ -59,7 +71,15 @@ def preprocess_testing_set(csv_path, **preprocessing_params):
 
     dataframe = pd.read_csv(csv_path)
     print("Dataset size: ", len(dataframe))
-    
+
+    out_csv_path = csv_path.replace('raw_data', 'preprocessed_data')
+    out_dir = '/'.join(out_csv_path.split('/')[:-1])
+    os.makedirs(out_dir, exist_ok=True)
+
+    f = open(out_csv_path, 'w')
+    writer = csv.writer(f)
+    writer.writerow(['defect_skull'])
+
     errors = list()
     for (current_id, defective_skull_path) in dataframe.itertuples():
         print("Current ID: ", current_id)
@@ -81,9 +101,11 @@ def preprocess_testing_set(csv_path, **preprocessing_params):
         os.makedirs('/'.join(preprocessed_defective_skull_path.split('/')[:-1]), exist_ok=True)
         
         u.save_volume(preprocessed_defective_skull, output_spacing, pathlib.Path(preprocessed_defective_skull_path))
+        writer.writerow([preprocessed_defective_skull_path])
     
     print("Mean error: ", np.mean(errors))
     print("Max error: ", np.max(errors))
+    f.close()
 def run():
     preprocessing_params = dict()
     preprocessing_params['output_spacing'] = (1.0, 1.0, 1.0)
@@ -91,13 +113,12 @@ def run():
     preprocessing_params['pad_size'] = 3
     preprocessing_params['offset'] = 35
 
-    preprocess_training_set(p.task1_train_path, **preprocessing_params)
-    # preprocess_training_set(p.task_1_training_path, p.task_1_training_preprocessed_path, p.task_1_validation_csv_path, **preprocessing_params)
+    preprocess_training_set(p.task1_r.train_csv, **preprocessing_params)
+    preprocess_training_set(p.task1_r.val_csv, **preprocessing_params)
+    preprocess_testing_set(p.task1_r.test_csv, **preprocessing_params)
 
-    # preprocess_task_3_training_set(p.task_3_training_path, p.task_3_training_preprocessed_path, p.task_3_training_csv_path, **preprocessing_params)
-    # preprocess_task_3_training_set(p.task_3_training_path, p.task_3_training_preprocessed_path, p.task_3_validation_csv_path, **preprocessing_params)
-
-    # preprocess_task_1_testing_set(p.task_1_testing_path, p.task_1_testing_preprocessed_path, p.task_1_testing_csv_path, **preprocessing_params)
-    # preprocess_task_3_testing_set(p.task_3_testing_path, p.task_3_testing_preprocessed_path, p.task_3_testing_csv_path, **preprocessing_params)
+    preprocess_training_set(p.task3_r.train_csv, **preprocessing_params)
+    preprocess_training_set(p.task3_r.val_csv, **preprocessing_params)
+    preprocess_testing_set(p.task3_r.test_csv, **preprocessing_params)
 if __name__ == '__main__':
     run()
