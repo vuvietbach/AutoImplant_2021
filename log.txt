@@ -7,6 +7,8 @@ TPU available: False, using: 0 TPU cores
 IPU available: False, using: 0 IPUs
 HPU available: False, using: 0 HPUs
 Missing logger folder: log/Task1_Experiments/Task1_Exp1/cp_1/lightning_logs
+/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/pytorch_lightning/callbacks/model_checkpoint.py:616: UserWarning: Checkpoint directory /mnt/disk1/hungvv/vuvietbach/AutoImplant_2021/log/Task1_Experiments/Task1_Exp1 exists and is not empty.
+  rank_zero_warn(f"Checkpoint directory {dirpath} exists and is not empty.")
 LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
 
   | Name | Type | Params
@@ -63,33 +65,16 @@ Traceback (most recent call last):
     data.reraise()
   File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/torch/_utils.py", line 461, in reraise
     raise exception
-KeyError: Caught KeyError in DataLoader worker process 0.
+TypeError: Caught TypeError in DataLoader worker process 0.
 Original Traceback (most recent call last):
-  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/pandas/core/indexes/base.py", line 3629, in get_loc
-    return self._engine.get_loc(casted_key)
-  File "pandas/_libs/index.pyx", line 136, in pandas._libs.index.IndexEngine.get_loc
-  File "pandas/_libs/index.pyx", line 163, in pandas._libs.index.IndexEngine.get_loc
-  File "pandas/_libs/hashtable_class_helper.pxi", line 5198, in pandas._libs.hashtable.PyObjectHashTable.get_item
-  File "pandas/_libs/hashtable_class_helper.pxi", line 5206, in pandas._libs.hashtable.PyObjectHashTable.get_item
-KeyError: 'Defective Skull Path'
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
   File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/torch/utils/data/_utils/worker.py", line 302, in _worker_loop
     data = fetcher.fetch(index)
   File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py", line 49, in fetch
     data = [self.dataset[idx] for idx in possibly_batched_index]
   File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py", line 49, in <listcomp>
     data = [self.dataset[idx] for idx in possibly_batched_index]
-  File "/mnt/disk1/hungvv/vuvietbach/AutoImplant_2021/./ori_code/datasets.py", line 58, in __getitem__
-    defect_path = current_case['Defective Skull Path']
-  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/pandas/core/series.py", line 958, in __getitem__
-    return self._get_value(key)
-  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/pandas/core/series.py", line 1069, in _get_value
-    loc = self.index.get_loc(label)
-  File "/mnt/disk1/hungvv/miniconda3/envs/skull/lib/python3.10/site-packages/pandas/core/indexes/base.py", line 3631, in get_loc
-    raise KeyError(key) from err
-KeyError: 'Defective Skull Path'
+  File "/mnt/disk1/hungvv/vuvietbach/AutoImplant_2021/./ori_code/datasets.py", line 75, in __getitem__
+    defect, spacing, _ = u.load_volume(self.data_folder / defect_path)
+TypeError: unsupported operand type(s) for /: 'str' and 'str'
 
                                    

@@ -34,13 +34,13 @@ def experiment(current_run):
     os.makedirs(log_dir, exist_ok=True)
     
     training_params = dict()
-    training_params['gpus'] = [0]
+    training_params['gpus'] = [2]
     training_params['num_workers'] = 4
     training_params['num_iters'] = 100
     training_params['cases_per_iter'] = 500
     training_params['learning_rate'] = 0.003
     training_params['decay_rate'] = 0.99
-    training_params['batch_size'] = 2
+    training_params['batch_size'] = 1
     training_params['cost_function'] = u.dice_loss
     training_params['transforms'] = aug.generate_transforms_flip_affine(scales=(0.97, 1.03), degrees=(-6, 6), translation=(-5, 5))
     training_params['training_mode'] = "defect_implant"

@@ -72,8 +72,8 @@ class AutoImplantDataset(tcu.data.Dataset):
             return tc.from_numpy(defect).to(self.dtype), tc.from_numpy(complete).to(self.dtype), spacing
         if self.mode == "defect_implant":
             implant_path = current_case['implant']
-            defect, spacing, _ = u.load_volume(self.data_folder / defect_path)
-            implant, _, _ = u.load_volume(self.data_folder / implant_path)
+            defect, spacing, _ = u.load_volume(defect_path)
+            implant, _, _ = u.load_volume(implant_path)
             if self.transforms is not None:
                 defect, implant = aug.apply_transform(defect, implant, self.transforms)
             spacing = tc.Tensor(spacing)
