@@ -34,25 +34,25 @@ def experiment(current_run):
     os.makedirs(log_dir, exist_ok=True)
     
     training_params = dict()
-    training_params['gpus'] = [2]
+    training_params['gpus'] = [0, 1]
     training_params['num_workers'] = 4
     training_params['num_iters'] = 100
     training_params['cases_per_iter'] = 500
     training_params['learning_rate'] = 0.003
     training_params['decay_rate'] = 0.99
-    training_params['batch_size'] = 1
+    training_params['batch_size'] = 2
     training_params['cost_function'] = u.dice_loss
     training_params['transforms'] = aug.generate_transforms_flip_affine(scales=(0.97, 1.03), degrees=(-6, 6), translation=(-5, 5))
     training_params['training_mode'] = "defect_implant"
-    training_params['checkpoints_path'] = os.path.join(p.log_path, experiments_family, experiment_name)
+    training_params['checkpoints_path'] = log_dir
     training_params['to_load_checkpoint'] = None if int(current_run) <= 1 else os.path.join(p.log_path, experiments_family, experiment_name, str("cp" + str(int(current_run) - 1)))
-    training_params['to_save_checkpoint'] = os.path.join(p.log_path, experiments_family, experiment_name, str("cp" + str(current_run)))
+    training_params['to_save_checkpoint'] = os.path.join(p.log_path, experiments_family, experiment_name, str("cp" + str(current_run)+'.ckpt'))
     training_params['save_best'] = True
-    task = p.test_task
+    task = p.preprocessed_task1
     training_params['data_path'] = task.train_path
     training_params['training_csv'] = task.train_csv
     training_params['validation_csv'] = task.val_csv
-    training_params['model_save_path'] = os.path.join(p.log_path, experiments_family, experiment_name, str("model_cp" + current_run))
+    training_params['model_save_path'] = os.path.join(p.log_path, experiments_family, experiment_name, str("model_cp" + current_run +'.ckpt'))
     training_params['logger'] = logger
 
     ############################

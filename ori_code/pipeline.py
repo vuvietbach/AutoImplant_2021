@@ -1,4 +1,9 @@
+import sys
+
 import os
+par_dir = os.path.dirname(__file__)
+sys.path.append(par_dir)
+
 import pathlib
 
 import numpy as np

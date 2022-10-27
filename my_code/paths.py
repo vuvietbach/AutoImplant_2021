@@ -11,7 +11,7 @@ task1_r.val_csv = task1_r.dir + '/val.csv'
 task1_r.test_csv = task1_r.dir + '/test.csv'
 
 task3_r = edict({
-    'dir': 'dataset/raw_data/task1'
+    'dir': 'dataset/raw_data/task3'
 }
 )
 task3_r.train_csv = task3_r.dir + '/train.csv'
